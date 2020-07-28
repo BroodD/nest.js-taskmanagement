@@ -2,7 +2,7 @@ server:
   port: 3000
 
 db:
-  type: 'postgres'
+  type: 'mysql'
   port: 5432
   username: 'postgres'
   database: 'taskmanagement'
