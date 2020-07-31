@@ -7,7 +7,7 @@ import { User } from 'src/auth/user.entity';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
-  async getTracks(
+  async getTasks(
     { status, search }: GetTasksFilterDto,
     user: User,
   ): Promise<Task[]> {
