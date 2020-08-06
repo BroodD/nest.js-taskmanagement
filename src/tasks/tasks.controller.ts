@@ -22,7 +22,10 @@ import { TaskStatus } from './task-status.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
+import { ApiTags, ApiBearerAuth, ApiNotFoundResponse } from '@nestjs/swagger';
 
+@ApiTags('tasks')
+@ApiBearerAuth()
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
@@ -44,6 +47,7 @@ export class TasksController {
   }
 
   @Get('/:id')
+  @ApiNotFoundResponse({ description: 'Not found task' })
   getTaskById(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
@@ -61,6 +65,7 @@ export class TasksController {
   }
 
   @Patch('/:id/status')
+  @ApiNotFoundResponse({ description: 'Not found task' })
   updateTaskStaus(
     @Param('id', ParseIntPipe) id: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
@@ -70,6 +75,7 @@ export class TasksController {
   }
 
   @Delete('/:id')
+  @ApiNotFoundResponse({ description: 'Not found task' })
   deleteTask(
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
